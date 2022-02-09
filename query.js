@@ -1,19 +1,20 @@
 /*
  * Simplified http client
- * Supports callback and promises
- * Automatically detects payload type and sets 'Content-Type' header
- *  type 'Uint8Array': sent as binary (application/octet-stream)
- *  type 'object': sent as json (application/json)
+ *  Supports callbacks and promises
+ *  Automatically sets headers from request payload type
+ *  Exposes converters .text() and .json() in responses
+ *  Supports Uint8Array binary format
+ *  Allows disabling exceptions
  * Options
- *  dataType, expected response from server 'binary'
+ *  dataType, set to binary if you expect an ArrayBuffer response
  *  headers, dictionnary of headers for the request
- *  noException, flag to never throw errors or exceptions
+ *  noException, boolean flag to disable exceptions when status code is lower than 400
  * Response
- *  headers, dictionnary of response headers
- *  status, status
- *  json(), json converter
- *  text, text formatted response
- *  raw, binary response
+ *  headers, a dictionnary of the response headers
+ *  status, the status code of the response
+ *  json, a function to convert the response payload in json
+ *  text, a function to convert the response payload in text
+ *  raw, the raw response
  */
 const query = (method,url,body,callback,options) => {
 
